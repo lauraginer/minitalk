@@ -6,7 +6,7 @@
 #    By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/25 10:43:36 by lginer-m          #+#    #+#              #
-#    Updated: 2024/10/25 11:32:14 by lginer-m         ###   ########.fr        #
+#    Updated: 2024/10/28 19:47:39 by lginer-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
 HEADERS = -I$(LIBFT) -I$(FT_PRINTF)
 
-SRCS = main.c \
+SRCS = main.c server.c client.c \
 
 OBJS = ${SRCS:.c=.o}
 

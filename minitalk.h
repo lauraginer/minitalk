@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:46 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/25 15:06:24 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/10/28 20:21:24 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_program
 	int	pid_client;
 }	t_program;
 
-void	*ejecute_server(t_program *program);
+int	ejecute_server(t_program *program);
+int	send_client(t_program *program, int	server_pid);
 
 #endif
