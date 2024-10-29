@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 19:18:16 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/29 20:30:36 by lauragm          ###   ########.fr       */
+/*   Created: 2024/10/29 20:07:14 by lauragm           #+#    #+#             */
+/*   Updated: 2024/10/29 20:21:49 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk.c"
 
-//ejecutar servidor y mostrar su pid
-int		ejecute_server(t_program *program)
+void handle_sigusr1(int sig)
 {
-	program->pid_server = getpid();
-	ft_printf("Perfect! Your server PID is %d\n", program->pid_server);
-	signal(SIGUSR1, handle_sigusr1); //registrar las funciones de manejo de señales
-	signal(SIGUSR2, handle_sigusr2);
-	return (1);
-}
-//enviar el PIDserver al cliente
+	(void)sig;
+	write(1,"SIGUSR1\n", 9);
+} //utiliza esto para utilizar la señal: signal(SIGUSR1, handle_sigusr1) y manejala en caso de error;
 
+void handle_sigusr2(int sig)
+{
+	(void)sig;
+	write(1,"SIGUSR2\n", 9);
+}//utiliza esto para utilizar la señal: signal(SIGUSR2, handle_sigusr2);

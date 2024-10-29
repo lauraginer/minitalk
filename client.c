@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:29 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/28 20:29:16 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/10/29 20:47:28 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,24 @@ int		ejecute_client(t_program *program)
 	ft_printf("Your client PID is %d\n", program->pid_client);
 	return (1);
 }
-/*El cliente debe de recibir el PID del servidor y 
-la string que se quiere enviar (comunicar la string pasada como parámetro al servidor)*/
-/*int	receive_client(t_program *program, int pid, char *str)
+//enviar el PIDserver al cliente y el string
+int	send_client(t_program *program, int	server_pid, char *str)
+{
+	//ft_printf("Sending server PID %d client is %d\n", program->pid_server, program->pid_client);
+	send_string(server_pid, str);
+	return(1);
+}
+
+//enviar la cadena de caracteres al servidor bit a bit
+int	send_string(int server_pid, char *str)
 {
 	int i;
-
+	int bit;
+	
 	i = 0;
-	if(i < program->pid_server)
+	while (str[i])
 	{
-		ft_printf("PID server is arrived");
-		program->pid_client = program->pid_server;
-		return(1);
+		bit = 0;
+		while (bit < 8)
 	}
-}*/
+}

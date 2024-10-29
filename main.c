@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:42:59 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/28 20:28:43 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/10/29 20:44:35 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	main(int argc, char **argv)
 	}
 	if (argc == 3)
 	{
-		server_pid = ft_atoi(argv[1]);
-		send_client(&program, server_pid);
+		server_pid = ft_atoi(argv[1]); //convierte la string a un entero
+		send_client(&program, server_pid, argv[2]);
 	}
 	else
 	{
