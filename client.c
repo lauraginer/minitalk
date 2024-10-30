@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:29 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/29 20:47:28 by lauragm          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:45:30 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,15 @@ int	send_string(int server_pid, char *str)
 	{
 		bit = 0;
 		while (bit < 8)
+		{
+			if((str[i] >> bit) & 1)//verifica si un bit especifico es 1
+				kill(server_pid, SIGUSR1); //envia la señal
+			else
+				kill(server_pid, SIGUSR2);
+			usleep(100);
+			bit++;
+		}
+		i++;	
 	}
-}
+	return (1);
+	}
