@@ -3,24 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:29 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/30 19:45:30 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:26:56 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-//ejecutar cliente y mostrar su pid
-int		ejecute_client(t_program *program)
-{
-	program->pid_client = getpid();
-	ft_printf("Your client PID is %d\n", program->pid_client);
-	return (1);
-}
 //enviar el PIDserver al cliente y el string
-int	send_client(t_program *program, int	server_pid, char *str)
+int	send_client(int	server_pid, char *str)
 {
 	//ft_printf("Sending server PID %d client is %d\n", program->pid_server, program->pid_client);
 	send_string(server_pid, str);

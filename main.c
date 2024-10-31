@@ -6,7 +6,7 @@
 /*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:42:59 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/29 20:44:35 by lauragm          ###   ########.fr       */
+/*   Updated: 2024/10/31 13:42:09 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,26 @@ int	main(int argc, char **argv)
 {
 	t_program	program;
 	int		server_pid;
-
-	(void)argv;
-	if (argc == 2)
+	
+	ft_memset(&program, 0, sizeof(t_program));
+	if (argc == 2)//server
 	{
-		ft_memset(&program, 0, sizeof(t_program));
-		ejecute_server(&program);
-		
+		if (ejecute_server(&program) < 1)
+		{
+			ft_printf("Error: Failed to get PID of server");
+			return (1);
+		}
+		server_loop();
 		
 	}
-	if (argc == 3)
+	else if (argc == 3)//client
 	{
 		server_pid = ft_atoi(argv[1]); //convierte la string a un entero
-		send_client(&program, server_pid, argv[2]);
+		if (send_client(server_pid, argv[2]) < 1)
+		{
+			ft_printf("Error: Failed the conexion with client\n");
+			return (1);
+		}
 	}
 	else
 	{

@@ -3,41 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:07:14 by lauragm           #+#    #+#             */
-/*   Updated: 2024/10/30 20:26:21 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:28:29 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.c"
+#include "minitalk.h"
 
-void handle_sigusr1(int sig, siginfo_t *info, void *ucontext)
+void handle_signals(int sig)
 {
-	char	current_char;
-	int		bit_count;
-	int		i;
-	(void)sig;
-	write(1,"SIGUSR1\n", 9);
+	static char	current_char;
+	static int	bit_count;
 
 	current_char = 0;
 	bit_count = 0;
-	i = -1;
-	if(current_char > i)
-	{
-		current_char |= (1 << bit_count);
-		bit_count++;
-	}
+	if (sig == SIGUSR1)
+		current_char &= ~(1 << (7 - bit_count)); //se limpia el bit en current_char
+	else if (sig == SIGUSR2)
+		current_char |= (1 << (7 - bit_count)); //se establece el bit correspondiente	
+	bit_count++;
 	if(bit_count == 8)
 	{
 		write(1,&current_char, 1);
 		current_char = 0;
 		bit_count = 0;
 	}	
-} //utiliza esto para utilizar la señal: signal(SIGUSR1, handle_sigusr1) y manejala en caso de error;
-
-void handle_sigusr2(int sig)
-{
-	(void)sig;
-	write(1,"SIGUSR2\n", 9);
-}//utiliza esto para utilizar la señal: signal(SIGUSR2, handle_sigusr2);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:46 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/30 17:35:37 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/10/31 13:27:08 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@
 typedef struct s_program
 {
 	int pid_server;
-	int	pid_client;
+//	int	pid_client;
 }	t_program;
 
 int	ejecute_server(t_program *program);
-int	send_client(t_program *program, int	server_pid, char *string);
-void handle_sigusr1(int sig);
-void handle_sigusr2(int sig);
+void server_loop(void);
+int	ejecute_client(t_program *program);
+int	send_client(int	server_pid, char *str);
+int	send_string(int server_pid, char *str);
+void handle_signals(int sig);
+
 
 #endif
