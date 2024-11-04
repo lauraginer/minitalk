@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:16 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/31 13:25:36 by lauragm          ###   ########.fr       */
+/*   Updated: 2024/11/04 20:05:54 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,30 @@ void	server_loop(void)
 		sleep(10);
 	}
 	return ;
+}
+
+int	main(int argc, char **argv)
+{
+	t_program	program;
+	
+	(void)argv;
+	ft_memset(&program, 0, sizeof(t_program));
+	ft_printf("Starting server....\n");
+	if (argc == 1)//server
+	{
+		if (ejecute_server(&program) < 1)
+		{
+			ft_printf("Error: Failed to get PID of server");
+			exit(EXIT_FAILURE);
+		}
+		
+	}
+	else
+	{
+		ft_printf("Error: Invalid arguments\n");
+		exit(EXIT_FAILURE); //termina el programa y devuelve un codigo de error al sistema operativo
+	}
+	server_loop();
+	return(0);
 }
 	

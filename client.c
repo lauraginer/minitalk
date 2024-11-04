@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:29 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/10/31 13:26:56 by lauragm          ###   ########.fr       */
+/*   Updated: 2024/11/04 19:52:39 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,3 +43,24 @@ int	send_string(int server_pid, char *str)
 	}
 	return (1);
 	}
+
+	int	main(int argc, char **argv)
+{
+	int	server_pid;
+	
+	if (argc == 3)//client
+	{
+		server_pid = ft_atoi(argv[1]); //convierte la string a un entero
+		if (send_client(server_pid, argv[2]) < 1)
+		{
+			ft_printf("Error: Failed the conexion with client\n");
+			return (1);
+		}
+	}
+	else
+	{
+		ft_printf("Error: Invalid arguments\n");
+		exit(EXIT_FAILURE); //termina el programa y devuelve un codigo de error al sistema operativo
+	}
+	return(0);
+}

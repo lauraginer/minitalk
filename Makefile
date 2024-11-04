@@ -3,20 +3,28 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+         #
+#    By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/25 10:43:36 by lginer-m          #+#    #+#              #
-#    Updated: 2024/10/31 13:27:52 by lauragm          ###   ########.fr        #
+#    Updated: 2024/11/04 19:35:50 by lginer-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
-
 CC = clang
 CFLAGS = -g -Wall -Werror -Wextra \
-		#-fsanitize=address,undefined \
-		#-Wunreachable-code -Ofast \
+        #-fsanitize=address,undefined \
+        #-Wunreachable-code -Ofast \
 
+NAME_SERVER = server
+SERVER_SRC = server.c
+SERVER_OBJ = $(SERVER_SRC:.c=.o)
+
+NAME_CLIENT = client
+CLIENT_SRC = client.c
+CLIENT_OBJ = $(CLIENT_SRC:.c=.o)
+
+SIGNALS_SRC = signals.c
+SIGNALS_OBJ = $(SIGNALS_SRC:.c=.o)
 
 LIBFT_DIR = Libft
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -24,34 +32,28 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF_DIR = ft_printf
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
-HEADERS = -I$(LIBFT) -I$(FT_PRINTF)
+all: $(NAME_SERVER) $(NAME_CLIENT)
 
-SRCS = main.c server.c client.c signals.c \
+$(NAME_SERVER): $(SERVER_OBJ) $(SIGNALS_OBJ) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) -o $(NAME_SERVER) $(SERVER_OBJ) $(SIGNALS_OBJ) $(LIBFT) $(FT_PRINTF)
 
-OBJS = ${SRCS:.c=.o}
+$(NAME_CLIENT): $(CLIENT_OBJ) $(SIGNALS_OBJ) $(LIBFT) $(FT_PRINTF)
+	$(CC) $(CFLAGS) -o $(NAME_CLIENT) $(CLIENT_OBJ) $(SIGNALS_OBJ) $(LIBFT) $(FT_PRINTF)
 
-all: libft ft_printf $(NAME)
-libft:
+$(LIBFT):
 	make -C $(LIBFT_DIR)
-ft_printf:
-	@make -C $(FT_PRINTF_DIR)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $< 
-$(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(HEADERS) $(OBJS) $(LIBFT) $(FT_PRINTF) $(LINK) -o $(NAME)
-	@echo "Compiling Minitalk..."
+$(FT_PRINTF):
+	make -C $(FT_PRINTF_DIR)
 
 clean:
-	@rm -rf $(OBJS)
-	@rm -rf $(LIBFT_DIR)/*.o
-	@rm -rf $(FT_PRINTF_DIR)/*.o
+	rm -f $(SERVER_OBJ) $(CLIENT_OBJ) $(SIGNALS_OBJ)
+	make -C $(LIBFT_DIR) clean
+	make -C $(FT_PRINTF_DIR) clean
 
 fclean: clean
-	@rm -rf $(NAME)
-	@rm -rf $(LIBFT)
-	@rm -rf $(FT_PRINTF)
+	rm -f $(NAME_SERVER) $(NAME_CLIENT)
+	make -C $(LIBFT_DIR) fclean
+	make -C $(FT_PRINTF_DIR) fclean
 
 re: fclean all
-
-.PHONY: all, clean, fclean, re, libft, ft_printf
