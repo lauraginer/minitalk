@@ -6,20 +6,22 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:16 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/11/04 20:05:54 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:11:50 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 //ejecutar servidor y mostrar su pid
-int		ejecute_server(t_program *program)
+int		ejecute_server(void)
 {
-	program->pid_server = getpid();
-	ft_printf("Perfect! Your server PID is %d\n", program->pid_server);
+	int	pid_server;
+	
+	pid_server = getpid();
+	ft_printf("Perfect! Your server PID is %d\n", pid_server);
 	signal(SIGUSR1, handle_signals); //registrar las funciones de manejo de señales
 	signal(SIGUSR2, handle_signals);
-	return (1);
+	return (0);
 }
 //bucle y gestionar los errores de las señales
 void	server_loop(void)
@@ -33,20 +35,19 @@ void	server_loop(void)
 			exit(EXIT_FAILURE);
 		}
 		sleep(10);
+		pause();
 	}
 	return ;
 }
 
 int	main(int argc, char **argv)
 {
-	t_program	program;
 	
 	(void)argv;
-	ft_memset(&program, 0, sizeof(t_program));
 	ft_printf("Starting server....\n");
 	if (argc == 1)//server
 	{
-		if (ejecute_server(&program) < 1)
+		if (ejecute_server() < 0)
 		{
 			ft_printf("Error: Failed to get PID of server");
 			exit(EXIT_FAILURE);

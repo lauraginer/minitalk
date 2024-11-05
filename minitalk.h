@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:49:46 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/11/04 20:11:16 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/11/05 21:00:46 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,12 @@
 # include <unistd.h>
 # include <stdio.h>
 
-typedef struct s_program
-{
-	int pid_server;
-//	int	pid_client;
-}	t_program;
-
-int	ejecute_server(t_program *program);
+int	ejecute_server(void);
 void server_loop(void);
-int	ejecute_client(t_program *program);
+void server_recieve(int boolean);
 int	send_client(int	server_pid, char *str);
 int	send_string(int server_pid, char *str);
+int send_bit(int server_pid, int bit);
 void handle_signals(int sig);
-
 
 #endif
