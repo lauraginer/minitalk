@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 20:07:14 by lauragm           #+#    #+#             */
-/*   Updated: 2024/11/06 18:00:28 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:21:19 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	server_recieve(int boolean)
 	if (bit_displacement == 8)
 	{
 		write(1, &letter, 1);
-		if (!letter)
-			write(1, "\n", 1);
 		bit_displacement = 0;
 		letter = 0;
 	}

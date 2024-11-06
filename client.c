@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 19:18:29 by lginer-m          #+#    #+#             */
-/*   Updated: 2024/11/06 17:46:47 by lginer-m         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:28:58 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	send_client(int server_pid, char *str)
 		ft_printf("Error: Failed the conexion with client\n");
 		return (-1);
 	}
+	free(str);
 	return (1);
 }
 
@@ -63,7 +64,8 @@ int	main(int argc, char **argv)
 	if (argc == 3) // client
 	{
 		server_pid = ft_atoi(argv[1]); // convierte la string a un entero
-		if (send_client(server_pid, argv[2]) < 1)
+		// if (send_client(server_pid, argv[2]) < 1)
+		if (send_client(server_pid, (ft_strjoin(argv[2], "\n"))) < 1)
 		{
 			ft_printf("Error: Failed the connection with server\n");
 			exit(EXIT_FAILURE);
