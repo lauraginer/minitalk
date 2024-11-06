@@ -6,13 +6,13 @@
 #    By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/25 10:43:36 by lginer-m          #+#    #+#              #
-#    Updated: 2024/11/04 19:35:50 by lginer-m         ###   ########.fr        #
+#    Updated: 2024/11/06 17:56:30 by lginer-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang
 CFLAGS = -g -Wall -Werror -Wextra \
-        #-fsanitize=address,undefined \
+        -g -fsanitize=address,undefined \
         #-Wunreachable-code -Ofast \
 
 NAME_SERVER = server
